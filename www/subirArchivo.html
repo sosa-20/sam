@@ -29,20 +29,7 @@
             <a href="inicio.html"><img src="img/logo1.png" alt=""></a>
             <div class="list-group list-group-flush">
 
-                <a class="list-group-item list-group-item-action bg-light" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Usuarios</a>
-                <div class="row">
-                    <div class="col">
-                        <div class="collapse multi-collapse" id="multiCollapseExample1">
-
-                            <ul class="list-group">
-                                <li class="">
-                                    <a href="usuarios.html" class="list-group-item list-group-item-action color-sublist">ver usuarios</a>
-                                    <a href="registroUsuario.html" class="list-group-item list-group-item-action color-sublist">crear</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                <a href="usuarios.html" class="list-group-item list-group-item-action bg-light">Usuarios</a>
 
                 <a class="list-group-item list-group-item-action bg-light" data-toggle="collapse" href="#multiCollapseExample2" role="button" aria-expanded="false" aria-controls="multiCollapseExample2">Multimedia</a>
                 <div class="row">
@@ -129,23 +116,16 @@
                     <div class="container">
                         <div class="row">
                             <div class="custom-file">
-                                <input id="image1" type="file" class="inputfile hidden-xs hidden-md" value="image1" name="image1" required />
-                                <label id="fichero" for="image1" class="my-btn btn-danger"><center>Archivo 1</center></label><br>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="customFile" onchange="return fileValidation()">
+                                    <label id="imagen1" class="custom-file-label" for="customFile">Subir Archivo</label>
+                                </div>
                                 <br><br>
+                                <div></div>
                                 <div class="table-responsive">
                                     <table class="table">
-                                        <tr>
-                                            <th scope="row"><i class="fas fa-image"></i></th>
-                                            <td>archivo imagen</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row"><i class="fas fa-video"></i></th>
-                                            <td>archivo video</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row"><i class="fas fa-file-pdf"></i></th>
-                                            <td>archivo PDF</td>
-                                        </tr>
+                                        <tbody id="imagePreview">
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -163,6 +143,7 @@
     <!-- Bootstrap core JavaScript -->
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/controlador.js"></script>
 
     <!-- Menu Toggle Script -->
     <script>

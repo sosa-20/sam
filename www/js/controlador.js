@@ -6,6 +6,9 @@ var campos = [
     { id: 'password', valido: false },
     { id: 'tipoUsuario', valido: false },
 ];
+
+
+/*arreglo de json para almacenar usuarios */
 var usuarios = [];
 var i = 2;
 
@@ -33,6 +36,7 @@ if (document.getElementById('respuesta')) {
 }
 
 
+
 function validarRegistro() {
     for (let i = 0; i < campos.length; i++)
         campos[i].valido = validarCampoVacio(campos[i].id);
@@ -53,6 +57,7 @@ function validarRegistro() {
     console.log(persona);
     console.log(i);
     usuarios[i] = persona;
+    anexarUsuario(i);
     i++;
     if (i == 4) {
         imprimirUsuarios();
@@ -95,29 +100,32 @@ function imprimirUsuarios() {
 function llenarUsuarios() {
 
     for (let i = 0; i < usuarios.length; i++) {
-        document.getElementById('respuesta').innerHTML += `
-                    <div class="card mb-3 col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
-                        <img src="img/carrusel/3.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text">${usuarios[i].nombre} ${usuarios[i].apellido}</p>
-                            <p class="card-text">${usuarios[i].email}</p>
-                            <p class="card-text">${usuarios[i].tipoUsuario}</p>
-                            <p>
-                                <a data-toggle="collapse" href="#opciones${i}" role="button" aria-expanded="false" aria-controls="opciones${i}">opciones</a>
-                            </p>
-                            <div class="collapse multi-collapse" id="opciones${i}">
-                                <div class="card-text">
-                                    <button type="button" class="btn btn-danger"><i class="far fa-trash-alt iconot"></i></button>
-                                    <button type="button" class="btn btn-warning"><i class="far fa-edit iconot"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>`;
+        anexarUsuario(i);
     }
 }
+/*llenar las targenats de usuarios */
+function anexarUsuario(i) {
+    document.getElementById('respuesta').innerHTML += `
+    <div class="card mb-3 col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+        <img src="img/carrusel/3.png" class="card-img-top" alt="...">
+        <div class="card-body">
+            <p class="card-text">${usuarios[i].nombre} ${usuarios[i].apellido}</p>
+            <p class="card-text">${usuarios[i].email}</p>
+            <p class="card-text">${usuarios[i].tipoUsuario}</p>
+            <p>
+                <a data-toggle="collapse" href="#opciones${i}" role="button" aria-expanded="false" aria-controls="opciones${i}">opciones</a>
+            </p>
+            <div class="collapse multi-collapse" id="opciones${i}">
+                <div class="card-text">
+                    <button type="button" class="btn btn-danger"><i class="far fa-trash-alt iconot"></i></button>
+                    <button type="button" class="btn btn-warning"><i class="far fa-edit iconot"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>`;
+}
 
-
-
+/*arreglo de json para las categorias */
 var categoriasTabla = [];
 var k = 2;
 cate = {
@@ -132,6 +140,7 @@ cate1 = {
 categoriasTabla[0] = cate;
 categoriasTabla[1] = cate1;
 
+/*funcion para validar las caregorias */
 function validarCategoria() {
     if (document.getElementById('categorias').value) {
         document.getElementById('mex').style.display = 'block';
@@ -148,12 +157,18 @@ function validarCategoria() {
         document.getElementById('mex').style.display = 'none';
     }
 }
+/*llamar funcion para llenar select de categorias para crear nueva entrada */
+if (document.getElementById('categoriaSelect')) {
+    llenarSelectCategorias();
+}
 
 
 function registrarCategoria() {
     validarCategoria();
 }
 
+
+/*funcion para validar el acceso en el login */
 function acceso() {
     for (let i = 0; i < usuarios.length; i++) {
         if ((usuarios[i].usuario == document.getElementById('inputEmail').value) && (usuarios[i].password == document.getElementById('inputPassword').value)) {
@@ -163,10 +178,13 @@ function acceso() {
         }
     }
 }
+
+/* llnar las categorias en la pagina de agregar categoria */
 if (document.getElementById('categoriasr')) {
     llenarCategorias();
 }
 
+/* llnar las categorias en la pagina de agregar categoria */
 function llenarCategorias() {
     document.getElementById('categoriasr').innerHTML = '';
     for (let i = 0; i < categoriasTabla.length; i++) {
@@ -184,7 +202,47 @@ function anexarCategoria(k) {
 }
 
 
-document.getElementById('image1').onchange = function() {
-    console.log(this.value);
-    document.getElementById('fichero').innerHTML = document.getElementById('image1').files[0].name;
+
+/*para subir imagenes*/
+function fileValidation() {
+    document.getElementById('imagePreview').innerHTML = ``;
+    var fileInput = document.getElementById('customFile');
+    var filePath = fileInput.value;
+    var allowedExtensions = /(.pdf|.jpg|.jpeg|.png|.gif)$/i;
+    console.log(filePath);
+    console.log(allowedExtensions);
+    if (!allowedExtensions.exec(filePath)) {
+        alert('Please upload file having extensions .jpeg/.jpg/.png/.gif only.');
+        fileInput.value = '';
+        return false;
+    } else {
+        //Image preview
+        if (fileInput.files && fileInput.files[0]) {
+            console.log(fileInput.files);
+            console.log(fileInput.files[0]);
+            console.log(fileInput.files[0].type);
+            var reader = new FileReader();
+            if (fileInput.files[0].type == "application/pdf") {
+                reader.onload = function(e) {
+                    document.getElementById('imagePreview').innerHTML += '<i class="fas fa-file-pdf"></i>';
+                };
+            } else {
+                reader.onload = function(e) {
+                    document.getElementById('imagePreview').innerHTML += `<tr>
+                    <td><img src="` + e.target.result + `" style="width: 70px; height: 40px;"/></td>
+                    <td>` + fileInput.files[0].name + `/td>
+                </tr>`;
+                };
+            }
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+    }
+}
+/*funcion llenar select categorias en nueva entrada */
+function llenarSelectCategorias() {
+    //document.getElementById('categoriaSelect').innerHTML = ``;
+    for (let i = 0; i < categoriasTabla.length; i++) {
+        document.getElementById('categoriaSelect').innerHTML += `<option>${categoriasTabla[i].nombre}</option>`;
+    }
+
 }
