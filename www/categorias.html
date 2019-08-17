@@ -77,7 +77,6 @@
                 </div>
                 <a href="#" class="list-group-item list-group-item-action bg-light">Profile</a>
                 <a href="#" class="list-group-item list-group-item-action bg-light">Status</a>
-
             </div>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -119,62 +118,48 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item"><a href="#">Multimedia</a></li>
-                        <li class="breadcrumb-item"><a href="#">Banco de archivos</a></li>
+                        <li class="breadcrumb-item"><a href="#">Entradas</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Crear Categoria</li>
                     </ol>
                 </nav>
-                <h1 class="mt-4">Banco de archivos</h1>
-
-                <main>
-                    <div class="container">
-                        <i class="fas fa-image"></i>
-                        <div class="row">
-                            <div class="table-responsive banco">
-                                <table class="table table-striped container" id="dataTables-example">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Archivo</th>
-                                            <th scope="col">Autor</th>
-                                            <th scope="col" class="fila">Comentario</th>
-                                            <th scope="col">post</th>
-                                            <th scope="col">Fecha de envio</th>
-                                            <th scope="col">Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row"><img src="img/carrusel/3.png" style="width: 40px; height: 40px;"></th>
-                                            <td>hola mundo</td>
-                                            <td>asdlksajkdknsban.kd,sb sjdkbsma fdsjf sjdkbsma fdsjf klds sjdkbsmas</td>
-                                            <td>hola mundo</td>
-                                            <td>13/06/2017</td>
-                                            <td><button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-                                                <button type="button" class="btn btn-warning"><i class="far fa-edit"></i></button></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row"><i class="fas fa-video"></i></th>
-                                            <td>Jacob</td>
-                                            <td>Jacob</td>
-                                            <td>5</td>
-                                            <td>13/06/2017</td>
-                                            <td><button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-                                                <button type="button" class="btn btn-warning"><i class="far fa-edit"></i></button></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row"><i class="fas fa-file-pdf"></i></th>
-                                            <td>Jacob</td>
-                                            <td>Larry</td>
-                                            <td>1</td>
-                                            <td>13/06/2017</td>
-                                            <td><button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-                                                <button type="button" class="btn btn-warning"><i class="far fa-edit"></i></button></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                <div class="row">
+                    <div class="col-12 col-lg-3">
+                        <form action="">
+                            <div class="form-group">
+                                <label for="categorias">Nobre categoria</label>
+                                <input type="text" class="form-control" id="categorias" placeholder="Nombre categoria">
+                                <div id="mess" class="invalid-feedback">Se necesita nombre de categorias</div>
                             </div>
+                            <div class="form-group">
+                                <label for="descriptionCat">Descripcion</label>
+                                <textarea id="descripcion" class="form-control" name="example"></textarea>
+                                <div id="mess" class="invalid-feedback">Se necesita una pequella descripcion</div>
+                            </div>
+                            <button type="button" class="btn btn-primary col-md-6" onclick="registrarCategoria();">Agregar</button>
+                            <div id="mex" class="alert alert-success" role="alert" style="display:none;">
+                                Datos registrados con exito!
+                            </div>
+                            <div id="mese" class=" alert alert-danger " role="alert " style="display:none;">
+                                Debes asegurarte que ninguno de los campos no este vacio!
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-12 col-lg-9">
+                        <div class="table-responsive cate">
+                            <table class="table table-striped container" id="dataTables-example">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Descripcion</th>
+                                        <th scope="col">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="categoriasr">
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                </main>
+                </div>
             </div>
         </div>
         <!-- /#page-content-wrapper -->
@@ -185,17 +170,13 @@
     <!-- Bootstrap core JavaScript -->
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/controlador.js"></script>
 
     <!-- Menu Toggle Script -->
     <script>
         $("#menu-toggle").click(function(e) {
             e.preventDefault();
             $("#wrapper").toggleClass("toggled");
-        });
-        $(document).ready(function() {
-            $('#dataTables-example').DataTable({
-                responsive: true
-            });
         });
     </script>
 

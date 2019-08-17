@@ -32,6 +32,7 @@ if (document.getElementById('respuesta')) {
     llenarUsuarios();
 }
 
+
 function validarRegistro() {
     for (let i = 0; i < campos.length; i++)
         campos[i].valido = validarCampoVacio(campos[i].id);
@@ -100,7 +101,7 @@ function llenarUsuarios() {
                         <div class="card-body">
                             <p class="card-text">${usuarios[i].nombre} ${usuarios[i].apellido}</p>
                             <p class="card-text">${usuarios[i].email}</p>
-                            <p class="card-text">administrador</p>
+                            <p class="card-text">${usuarios[i].tipoUsuario}</p>
                             <p>
                                 <a data-toggle="collapse" href="#opciones${i}" role="button" aria-expanded="false" aria-controls="opciones${i}">opciones</a>
                             </p>
@@ -115,6 +116,44 @@ function llenarUsuarios() {
     }
 }
 
+
+
+var categoriasTabla = [];
+var k = 2;
+cate = {
+    nombre: 'las mejores',
+    descripcion: 'esta categoria esta dedicada a los mejores ',
+}
+cate1 = {
+    nombre: 'para clientes',
+    descripcion: 'esta categoria esta dedicada a los clientes ',
+}
+
+categoriasTabla[0] = cate;
+categoriasTabla[1] = cate1;
+
+function validarCategoria() {
+    if (document.getElementById('categorias').value) {
+        document.getElementById('mex').style.display = 'block';
+        document.getElementById('mese').style.display = 'none';
+        var categ = {
+            nombre: document.getElementById('categorias').value,
+            descripcion: document.getElementById('descripcion').value,
+        }
+        categoriasTabla[k] = categ;
+        anexarCategoria(k);
+        k++;
+    } else {
+        document.getElementById('mese').style.display = 'block';
+        document.getElementById('mex').style.display = 'none';
+    }
+}
+
+
+function registrarCategoria() {
+    validarCategoria();
+}
+
 function acceso() {
     for (let i = 0; i < usuarios.length; i++) {
         if ((usuarios[i].usuario == document.getElementById('inputEmail').value) && (usuarios[i].password == document.getElementById('inputPassword').value)) {
@@ -123,4 +162,29 @@ function acceso() {
             document.getElementById('error').style.display = 'block';
         }
     }
+}
+if (document.getElementById('categoriasr')) {
+    llenarCategorias();
+}
+
+function llenarCategorias() {
+    document.getElementById('categoriasr').innerHTML = '';
+    for (let i = 0; i < categoriasTabla.length; i++) {
+        anexarCategoria(i);
+    }
+}
+
+function anexarCategoria(k) {
+    document.getElementById('categoriasr').innerHTML += `<tr>
+        <th scope="row">${categoriasTabla[k].nombre}</th>
+        <td>${categoriasTabla[k].descripcion}</td>
+        <td><button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+            <button type="button" class="btn btn-warning"><i class="far fa-edit"></i></button></td>
+            </tr>`;
+}
+
+
+document.getElementById('image1').onchange = function() {
+    console.log(this.value);
+    document.getElementById('fichero').innerHTML = document.getElementById('image1').files[0].name;
 }
