@@ -1,0 +1,134 @@
+/*!
+ * Start Bootstrap - Simple Sidebar (https://startbootstrap.com/template-overviews/simple-sidebar)
+ * Copyright 2013-2019 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-simple-sidebar/blob/master/LICENSE)
+ */
+
+body {
+    overflow-x: hidden;
+}
+
+#sidebar-wrapper {
+    min-height: 100vh;
+    margin-left: -15rem;
+    -webkit-transition: margin .25s ease-out;
+    -moz-transition: margin .25s ease-out;
+    -o-transition: margin .25s ease-out;
+    transition: margin .25s ease-out;
+}
+
+#sidebar-wrapper .sidebar-heading {
+    padding: 0.875rem 1.25rem;
+    font-size: 1.2rem;
+}
+
+#sidebar-wrapper .list-group {
+    width: 15rem;
+}
+
+#page-content-wrapper {
+    min-width: 100vw;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    margin-left: 0;
+}
+
+@media (min-width: 768px) {
+    #sidebar-wrapper {
+        margin-left: 0;
+    }
+    #page-content-wrapper {
+        min-width: 0;
+        width: 100%;
+    }
+    #wrapper.toggled #sidebar-wrapper {
+        margin-left: -15rem;
+    }
+}
+
+.bg-light {
+    background-color: #1da7de!important;
+    color: #fff;
+}
+
+a.bg-light:focus,
+a.bg-light:hover,
+button.bg-light:focus,
+button.bg-light:hover {
+    background-color: #cdfdff!important;
+}
+
+.color-sublist {
+    background-color: #80b0c4!important;
+    color: #fff;
+}
+
+.color-sublist:hover {
+    background: #eafeff!important;
+    color: rgb(0, 0, 0);
+}
+
+.breadcrumb {
+    background-color: #fff;
+}
+
+.card {
+    border-color: #fff;
+}
+
+.card:hover {
+    background-color: #1da7de;
+    color: #fff;
+}
+
+.for form {
+    padding-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #edf6ff;
+    border-radius: 15px;
+}
+
+form .btn-primary:hover {
+    background-color: #a02323;
+    border-color: #a02323;
+}
+
+.card-text {
+    font-size: 0.7rem;
+}
+
+.card-body p {
+    margin-bottom: .5rem;
+}
+
+td .btn {
+    padding: .1rem;
+}
+
+td .btn-danger {
+    background-color: #1da7de;
+    border-color: #1da7de;
+}
+
+td .btn-warning {
+    background-color: #91d8f5;
+    border-color: #1da7de;
+}
+
+.comentarios .card-body {
+    padding: .7rem;
+}
+
+.comentarios .btn-danger {
+    background-color: #91d8f5;
+    border-color: #91d8f5;
+}
+
+.dropdown-item:hover {
+    background-color: #cdfdff;
+}
