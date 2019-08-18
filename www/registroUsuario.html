@@ -10,165 +10,86 @@
     <link rel="icon" href="img/log.png" type="image/png">
 
     <title>SAM</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="css/simple-sidebar.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/lagding/main.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-
 </head>
 
-<body>
-
-    <div class="d-flex" id="wrapper">
-
-        <!-- Sidebar -->
-        <div class="bg-light border-right" id="sidebar-wrapper">
-            <a href="inicio.html"><img src="img/logo1.png" alt=""></a>
-            <div class="list-group list-group-flush">
-
-                <a href="usuarios.html" class="list-group-item list-group-item-action bg-light">Usuarios</a>
-
-                <a class="list-group-item list-group-item-action bg-light" data-toggle="collapse" href="#multiCollapseExample2" role="button" aria-expanded="false" aria-controls="multiCollapseExample2">Multimedia</a>
-                <div class="row">
-                    <div class="col">
-                        <div class="collapse multi-collapse" id="multiCollapseExample2">
-
-                            <ul class="list-group">
-                                <li class="">
-                                    <a href="subirArchivo.html" class="list-group-item list-group-item-action color-sublist">Subir</a>
-                                    <a href="bancoArchivos.html" class="list-group-item list-group-item-action color-sublist">Ver banco</a>
-
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <a href="comentarios.html" class="list-group-item list-group-item-action bg-light">Comentarios</a>
-                <a class="list-group-item list-group-item-action bg-light" data-toggle="collapse" href="#entradas" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Entradas</a>
-                <div class="row">
-                    <div class="col">
-                        <div class="collapse multi-collapse" id="entradas">
-
-                            <ul class="list-group">
-                                <li class="">
-                                    <a href="nuevaEntrada.html" class="list-group-item list-group-item-action color-sublist">Nueva entrada</a>
-                                    <a href="categorias.html" class="list-group-item list-group-item-action color-sublist">Crear categoria</a>
-
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <a href="#" class="list-group-item list-group-item-action bg-light">Profile</a>
-                <a href="#" class="list-group-item list-group-item-action bg-light">Status</a>
-
-            </div>
-        </div>
-        <!-- /#sidebar-wrapper -->
-
-        <!-- Page Content -->
-        <div id="page-content-wrapper">
-
-            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-                <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
-
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<body style="background-color: #4dacff;">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-black">
+        <a class="navbar-brand" href="#"><img src="img/logo1.png"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown
-              </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
 
-            <div class="container">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item"><a href="#">Usuarios</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Registrar Usuario</li>
-                    </ol>
-                </nav>
-                <h1 class="mt-4">Registrar Usuario</h1>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Inicio<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Sobre nosotros</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">precios</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Contactanos</a>
+                </li>
+            </ul>
+            <form id="formu" class="form-inline my-2 my-lg-0">
+                <button class="btn btn-danger my-2 my-sm-0" type="submit">Iniciar Secion</button>
+            </form>
+        </div>
+    </nav>
 
-                <main>
-                    <div class="container">
-                        <div class="row for">
-                            <form>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6 col-lg-4">
-                                        <label for="inputEmail4">Nombre</label>
-                                        <input type="text" class="form-control" id="nombre" placeholder="Nombre">
-                                        <div class="invalid-feedback">Se necesita nombre</div>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="inputPassword4">Apellido</label>
-                                        <input type="text" class="form-control" id="apellido" placeholder="Apellido">
-                                        <div class="invalid-feedback">Se necesita apellido</div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputEmail4">Email</label>
-                                    <input onkeyup="validarCorreo(this)" type="email" class="form-control" id="email" placeholder="ejemplo@gmail.com">
-                                    <div class="invalid-feedback">Correo incorecto</div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputPassword4">Nobre de usuario</label>
-                                    <input type="text" class="form-control" id="usuario" placeholder="usuario">
-                                    <div class="invalid-feedback">Se necesita nombre de usuario</div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputPassword4">Contraseña de usuario</label>
-                                    <input type="password" class="form-control" id="password">
-                                    <div class="invalid-feedback">Debe ingresar una Contraseña</div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="tipoUsuario">Tipo usuario</label>
-                                    <select class="form-control mr-sm-2" id="tipoUsuario">
-                                           <option>administrador</option>
-                                           <option>Registrado</option>
-                                           <option>Sin registrar</option>
-                                    </select>
-                                    <div class="invalid-feedback">Debe seleccionar una opcion</div>
-                                </div>
-                                <div id="exito" class="alert alert-success" role="alert" style="display:none;">
-                                    Datos registrados con exito!
-                                </div>
-                                <div id="error" class=" alert alert-danger " role="alert " style="display:none;">
-                                    Debes asegurarte que ninguno de los campos no este vacio!
-                                </div>
 
-                                <center><button type="button" class="btn btn-primary col-md-6" onclick="validarRegistro()">Sign in</button></center>
-                            </form>
+    <main>
+        <div class="container">
+            <div class="row for">
+                <form>
+                    <h1 class="mt-4">Registrar Usuario</h1>
+                    <div class="form-row">
+                        <div class="form-group col-md-6 col-lg-4">
+                            <label for="inputEmail4">Nombre</label>
+                            <input type="text" class="form-control" id="nombre" placeholder="Nombre">
+                            <div class="invalid-feedback">Se necesita nombre</div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputPassword4">Apellido</label>
+                            <input type="text" class="form-control" id="apellido" placeholder="Apellido">
+                            <div class="invalid-feedback">Se necesita apellido</div>
                         </div>
                     </div>
-                </main>
+                    <div class="form-group">
+                        <label for="inputEmail4">Email</label>
+                        <input onkeyup="validarCorreo(this)" type="email" class="form-control" id="email" placeholder="ejemplo@gmail.com">
+                        <div class="invalid-feedback">Correo incorecto</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword4">Nobre de usuario</label>
+                        <input type="text" class="form-control" id="usuario" placeholder="usuario">
+                        <div class="invalid-feedback">Se necesita nombre de usuario</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword4">Contraseña de usuario</label>
+                        <input type="password" class="form-control" id="password">
+                        <div class="invalid-feedback">Debe ingresar una Contraseña</div>
+                    </div>
+                    <div id="exito" class="alert alert-success" role="alert" style="display:none;">
+                        Datos registrados con exito!
+                    </div>
+                    <div id="error" class=" alert alert-danger " role="alert " style="display:none;">
+                        Debes asegurarte que ninguno de los campos no este vacio!
+                    </div>
+
+                    <center><button type="button" class="btn btn-primary col-md-6" onclick="validarRegistro()">Registrarme</button></center>
+                </form>
             </div>
         </div>
-        <!-- /#page-content-wrapper -->
+    </main>
 
-    </div>
     <!-- /#wrapper -->
 
     <!-- Bootstrap core JavaScript -->

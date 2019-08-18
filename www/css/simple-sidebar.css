@@ -77,7 +77,12 @@ button.bg-light:hover {
     border-color: #fff;
 }
 
-.card:hover {
+#respuesta .card:hover {
+    background-color: #1da7de;
+    color: #fff;
+}
+
+.comentar .card:hover {
     background-color: #1da7de;
     color: #fff;
 }
@@ -131,4 +136,12 @@ td .btn-warning {
 
 .dropdown-item:hover {
     background-color: #cdfdff;
+}
+
+.paginaPrincipal {
+    padding-top: 20px;
+}
+
+.iniciopag {
+    background-color: #edf6ff;
 }

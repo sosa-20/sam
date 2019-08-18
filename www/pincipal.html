@@ -6,36 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>pincipal</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Custom styles for this template -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
 </head>
 
 <body>
-    <!-- File input field -->
-    <input type="file" id="file" onchange="return fileValidation()" />
+    <div class="container paginaPrincipal">
+        <a href="loggin.html">acceder</a>
+        <div class="row">
+            <div class="col-12">
+                <h1>Bienvenido a mi sitio web quedate con nosotros</h1>
+                <br><br><br>
+                <div class="col-10 col-lg-7">
+                    <h5>Bienvenido a SAM. aqui podras visualizar tus entradas que agregues al ingresar.</h5>
+                </div>
+            </div>
+            <div class="col-12"></div>
+        </div>
+    </div>
 
-    <!-- Image preview -->
-    <div id="imagePreview"></div>
-
-    <script>
-        function fileValidation() {
-            var fileInput = document.getElementById('file');
-            var filePath = fileInput.value;
-            var allowedExtensions = /(.jpg|.jpeg|.png|.gif)$/i;
-            if (!allowedExtensions.exec(filePath)) {
-                alert('Please upload file having extensions .jpeg/.jpg/.png/.gif only.');
-                fileInput.value = '';
-                return false;
-            } else {
-                //Image preview
-                if (fileInput.files && fileInput.files[0]) {
-                    var reader = new FileReader();
-                    reader.onload = function(e) {
-                        document.getElementById('imagePreview').innerHTML = '<img src="' + e.target.result + '"/>';
-                    };
-                    reader.readAsDataURL(fileInput.files[0]);
-                }
-            }
-        }
-    </script>
 
 </body>
 

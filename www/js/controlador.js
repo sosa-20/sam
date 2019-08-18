@@ -28,6 +28,12 @@ dos = {
     password: 'asd.456',
     tipoUsuario: 'Registrado',
 };
+
+/*llamaar funcion pra verificar el usuario que inicio secion*/
+if (document.getElementById('sesion'))
+    sesionUsuario(uno);
+
+
 usuarios[0] = uno;
 usuarios[1] = dos;
 if (document.getElementById('respuesta')) {
@@ -196,19 +202,20 @@ function anexarCategoria(k) {
     document.getElementById('categoriasr').innerHTML += `<tr>
         <th scope="row">${categoriasTabla[k].nombre}</th>
         <td>${categoriasTabla[k].descripcion}</td>
-        <td><button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-            <button type="button" class="btn btn-warning"><i class="far fa-edit"></i></button></td>
+        <td><button type="button" class="btn btn-danger" onclick="eliminarCategoria(${k})"><i class="far fa-trash-alt"></i></button>
+            <button type="button" class="btn btn-warning" onclick="editarCategoria(${k})"><i class="far fa-edit"></i></button></td>
             </tr>`;
 }
 
 
-
+var archivos = [];
+var conta = 0;
 /*para subir imagenes*/
 function fileValidation() {
-    document.getElementById('imagePreview').innerHTML = ``;
+    // document.getElementById('imagePreview').innerHTML = '';
     var fileInput = document.getElementById('customFile');
     var filePath = fileInput.value;
-    var allowedExtensions = /(.pdf|.jpg|.jpeg|.png|.gif)$/i;
+    var allowedExtensions = /(.mp4|.pdf|.jpg|.jpeg|.png|.gif)$/i;
     console.log(filePath);
     console.log(allowedExtensions);
     if (!allowedExtensions.exec(filePath)) {
@@ -224,16 +231,24 @@ function fileValidation() {
             var reader = new FileReader();
             if (fileInput.files[0].type == "application/pdf") {
                 reader.onload = function(e) {
-                    document.getElementById('imagePreview').innerHTML += '<i class="fas fa-file-pdf"></i>';
+
+                    document.getElementById('imagePreview').innerHTML += `<tr>
+                    <td><i class="fas fa-file-pdf"></i></td>
+                    <td>${fileInput.files[0].name}</td>
+                </tr>`;
                 };
             } else {
                 reader.onload = function(e) {
-                    document.getElementById('imagePreview').innerHTML += `<tr>
-                    <td><img src="` + e.target.result + `" style="width: 70px; height: 40px;"/></td>
-                    <td>` + fileInput.files[0].name + `/td>
+                    document.getElementById('imagePreview').innerHTML = `<tr>
+                    <td><img src="${e.target.result}" style="width: 50px; height: 40px;"/></td>
+                    <td>` + fileInput.files[0].name + `</td>
                 </tr>`;
+                    // llenarArchivos(fileInput.files[0].name, e.target.result);
                 };
             }
+            archivos[conta] = fileInput.files[0];
+            console.log(archivos[conta]);
+            conta++;
             reader.readAsDataURL(fileInput.files[0]);
         }
     }
@@ -245,4 +260,25 @@ function llenarSelectCategorias() {
         document.getElementById('categoriaSelect').innerHTML += `<option>${categoriasTabla[i].nombre}</option>`;
     }
 
+}
+
+function eliminarCategoria(key) {
+    console.log(key);
+    document.getElementById('categorias').value = categoriasTabla[key].nombre;
+}
+
+function llenarArchivos(name, ruta) {
+    console.log(ruta);
+    document.getElementById('imagePreview').innerHTML = `<tr>
+                    <td><img src="${ruta}" style="width: 50px; height: 40px;"/></td>
+                    <td>` + name + `</td>
+                </tr>`;
+    for (let index = 0; index < archivos.length; index++) {
+        console.log("este es" + index);
+        console.log(archivos[index]);
+    }
+}
+
+function sesionUsuario(x) {
+    document.getElementById('sesion').innerHTML = `<h6>Hola ${x.usuario}</h6> <a><i class="far fa-user" style="font-size: 1.2rem; background-color: #1df7d1;"></i></a>`;
 }

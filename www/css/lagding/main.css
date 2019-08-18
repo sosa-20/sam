@@ -90,7 +90,8 @@ li a {
 
 .btn-primary:hover {
     color: black;
-    background-color: #fff;
+    background-color: rgb(25, 136, 255);
+    border-color: #1DA7DE;
 }
 
 .btn-secondary:hover {
@@ -168,7 +169,7 @@ div button {
     margin-top: 120px;
     margin-left: auto;
     margin-right: auto;
-    background-color: #edf6ff;
+    background-color: rgb(111, 188, 255);
     border-radius: 15px;
 }
 
@@ -214,4 +215,12 @@ div button {
 
 #passs {
     margin-top: 10px;
+}
+
+h6 .enlace {
+    color: rgb(9, 12, 236);
+}
+
+.form-signin {
+    border-color: rgb(9, 12, 236);
 }
