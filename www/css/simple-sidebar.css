@@ -145,3 +145,12 @@ td .btn-warning {
 .iniciopag {
     background-color: #edf6ff;
 }
+
+.inicioConfig .card-text {
+    font-family: 'Fredoka One';
+    font-size: 1rem;
+}
+
+.inicioConfig .sam {
+    font-family: 'Alfa Slab One';
+}

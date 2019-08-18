@@ -224,3 +224,13 @@ h6 .enlace {
 .form-signin {
     border-color: rgb(9, 12, 236);
 }
+
+.inicioConfig .sam {
+    font-family: 'Alfa Slab One';
+    color: #ffffff;
+}
+
+.img img {
+    display: block;
+    margin: auto;
+}
