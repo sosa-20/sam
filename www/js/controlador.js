@@ -113,7 +113,7 @@ function llenarUsuarios() {
 function anexarUsuario(i) {
     document.getElementById('respuesta').innerHTML += `
     <div class="card mb-3 col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
-        <img src="img/carrusel/3.png" class="card-img-top" alt="...">
+        <img src="img/3.png" class="card-img-top" alt="...">
         <div class="card-body">
             <p class="card-text">${usuarios[i].nombre} ${usuarios[i].apellido}</p>
             <p class="card-text">${usuarios[i].email}</p>
@@ -278,7 +278,28 @@ function llenarArchivos(name, ruta) {
         console.log(archivos[index]);
     }
 }
-
+/* imprimir el nombre de usuario que inicio secion*/
 function sesionUsuario(x) {
     document.getElementById('sesion').innerHTML = `<h6>Hola ${x.usuario}</h6> <a><i class="far fa-user" style="font-size: 1.2rem; background-color: #1df7d1;"></i></a>`;
+}
+
+/*validacion de las entradas */
+entradas = [
+    { id: 'tituloEntrada', valido: false },
+    { id: 'categoriaSelect', valido: false },
+];
+
+function registrarEntrada() {
+    console.log("holaaa");
+    for (let i = 0; i < entradas.length; i++)
+        entradas[i].valido = validarCampoVacio(entradas[i].id);
+
+    console.log(entradas);
+    for (let i = 0; i < entradas.length; i++) {
+        if (!entradas[i].valido) {
+            document.getElementById('entradaError').style.display = 'block';
+            return;
+        }
+    }
+    document.getElementById('entradaExito').style.display = 'block';
 }

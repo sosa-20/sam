@@ -69,7 +69,7 @@
         </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                   <ul class="navbar-nav ml-auto mt-2 mt-lg-0" id="sesion">
+                    <ul class="navbar-nav ml-auto mt-2 mt-lg-0" id="sesion">
                     </ul>
                 </div>
             </nav>
@@ -85,29 +85,40 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
-                            <div class="page-wrapper box-content">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="usuario" placeholder="titulo">
-                                </div>
-                                <div class="form-group">
-                                    <label for="categoriaSelect">Seleccione una categoria</label>
-                                    <select class="form-control mr-sm-2" id="categoriaSelect">
+                            <form method="GET">
+                                <div class="page-wrapper box-content">
+                                    <div class="form-group">
+                                        <label for="categoriaSelect">Ingrese un titulo</label>
+                                        <input type="text" class="form-control" id="tituloEntrada" placeholder="titulo">
+                                        <div class="invalid-feedback">Debe seleccionar una opcion</div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="categoriaSelect">Seleccione una categoria</label>
+                                        <select class="form-control mr-sm-2" id="categoriaSelect">
                                            
                                     </select>
-                                    <div class="invalid-feedback">Debe seleccionar una opcion</div>
-                                </div>
-                                <textarea class="content" name="example"></textarea>
+                                        <div class="invalid-feedback">Debe seleccionar una opcion</div>
+                                    </div>
+                                    <textarea class="content" name="example"></textarea>
 
-                            </div>
-                            <div class="form-group col-12">
-                                Comentarios<br>
-                                <label><input name="comentariosOpcion" type="radio" value="S">Si</label>
-                                <label><input name="comentariosOpcion" type="radio" value="M">No</label>
-                            </div>
-                            <a href="paginaCreada.html">ver pagina</a><br>
-                            <button type="button" class="btn btn-primary col-md-6" onclick="registrarCategoria();">Agregar</button>
-                            <br>
-                            <hr>
+                                </div>
+                                <div class="form-group col-12">
+                                    Comentarios<br>
+                                    <label><input name="comentariosOpcion" type="radio" value="S">Si</label>
+                                    <label><input name="comentariosOpcion" type="radio" value="M">No</label>
+                                </div>
+                                <a href="paginaCreada.html" target="_blank">ver pagina</a><br>
+
+                                <div id="entradaError" class=" alert alert-danger " role="alert " style="display:none;">
+                                    Debes asegurarte que ninguno de los campos no este vacio!
+                                </div>
+                                <div id="entradaExito" class="alert alert-success" role="alert " style="display:none;">
+                                    Entrada registrada con exito!
+                                </div>
+                                <button type="button" class="btn btn-primary col-md-6" onclick="registrarEntrada()">Agregar</button>
+                                <br>
+                                <hr>
+                            </form>
                         </div>
                     </div>
                 </div>

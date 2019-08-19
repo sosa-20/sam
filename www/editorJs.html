@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://cdn.alloyui.com/3.0.1/aui-css/css/bootstrap.min.css" rel="stylesheet"></link>
+</head>
+
+<body>
+    <div id="myEditor"></div>
+    <script src="https://cdn.alloyui.com/3.0.1/aui/aui-min.js"></script>
+    <script>
+        YUI().use(
+            'aui-ace-editor',
+            function(Y) {
+                new Y.AceEditor({
+                    boundingBox: '#myEditor',
+                    mode: 'javascript'
+                }).render();
+            }
+        );
+    </script>
+</body>
+
+</html>
