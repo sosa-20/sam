@@ -154,3 +154,13 @@ td .btn-warning {
 .inicioConfig .sam {
     font-family: 'Alfa Slab One';
 }
+
+#menu-toggle {
+    display: none;
+}
+
+@media screen and (max-width: 991px) and (min-width: 300px) {
+    #menu-toggle {
+        display: block;
+    }
+}
