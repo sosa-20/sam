@@ -1,5 +1,8 @@
 var tipo;
 function subir(){
+	var f = new Date();
+	fecha= f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear();
+    console.log(fecha);
     console.log("holaa subi");
     console.log(document.getElementById('arc').files[0].name);
 
@@ -16,7 +19,7 @@ function subir(){
 
     let nombre= document.getElementById('arc').files[0].name;
     let url='uploads/' + nombre;
-    let parametros = `url=${url}`;
+    let parametros = `url=${url}&nombreArchivo=${nombre}&fechaSubida=${fecha}`;
     console.log('Información a enviar: ' + parametros);
     $.ajax({
         url:'archivos/',

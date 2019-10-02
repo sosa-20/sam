@@ -7,7 +7,9 @@ var router = express.Router();
 //guardar archivo
 router.post('/',function(req,res){
     let a = new archivo({
-        url:req.body.url
+        url:req.body.url,
+        nombreArchivo:req.body.nombreArchivo,
+        fechaSubida:req.body.fechaSubida
     }); 
 
     //Promesa
