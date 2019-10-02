@@ -9,7 +9,8 @@ router.post('/',function(req,res){
     let a = new archivo({
         url:req.body.url,
         nombreArchivo:req.body.nombreArchivo,
-        fechaSubida:req.body.fechaSubida
+        fechaSubida:req.body.fechaSubida,
+        tipo:req.body.tipo
     }); 
 
     //Promesa
@@ -23,6 +24,20 @@ router.post('/',function(req,res){
         res.end();
     });
 });
+
+//Obtener todos los archivos
+router.get('/',function(req,res){
+    archivo.find()
+    .then((data)=>{
+        res.send(data);
+        res.end();
+    })
+    .catch((error)=>{
+        res.send(error);
+        res.end();
+    });
+});
+
 
 //eliminar archivo
 router.delete('/:id',function(req,res){
