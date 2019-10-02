@@ -104,7 +104,11 @@
                                 <textarea id="descripcion" class="form-control" name="example"></textarea>
                                 <div id="mess" class="invalid-feedback">Se necesita una pequella descripcion</div>
                             </div>
-                            <button type="button" class="btn btn-primary col-md-6" onclick="registrarCategoria();">Agregar</button>
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <button type="button" id="btn-limpiar" class="btn btn-success " onclick="limpiar()" style="display: none">Limpiar</button>
+                                <button type="button" id="btn-actualizar" class="btn btn-secondary " onclick="actualizar()" style="display: none">Actualizar</button>
+                            </div>
+                            <button type="button" id="btn-cat" class="btn btn-primary col-md-6" onclick="registrarCategoria();">Agregar</button>
                             <div id="mex" class="alert alert-success" role="alert" style="display:none;">
                                 Datos registrados con exito!
                             </div>
@@ -139,7 +143,7 @@
     <!-- Bootstrap core JavaScript -->
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/controlador.js"></script>
+    <script src="js/controlador-categorias.js"></script>
 
     <!-- Menu Toggle Script -->
     <script>

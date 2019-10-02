@@ -56,7 +56,7 @@ function validarRegistro() {
         nombre: document.getElementById('nombre').value,
         apellido: document.getElementById('apellido').value,
         email: document.getElementById('email').value,
-        usuario: document.getElementById('usuario').value,
+        usuario: document.getElementById('nombreUsuario').value,
         password: document.getElementById('password').value,
         tipoUsuario: document.getElementById('tipoUsuario').value,
     }
@@ -140,7 +140,7 @@ cate = {
 }
 cate1 = {
     nombre: 'para clientes',
-    descripcion: 'esta categoria esta dedicada a los clientes ',
+    descripcion: 'esta categoria esta dedicada sdasd sada sda das dasdasd asdasrfwet retretrytghfd fgdgfer tretr efsfds fdsgrtut yuytuyiytuty a los clientes ',
 }
 
 categoriasTabla[0] = cate;
@@ -176,13 +176,34 @@ function registrarCategoria() {
 
 /*funcion para validar el acceso en el login */
 function acceso() {
-    for (let i = 0; i < usuarios.length; i++) {
+    $.ajax({
+        url:"/usuarios",
+        dataType:"json",
+		method:"GET",
+		success:function(res){
+            console.log(res[0].nombre);
+            console.log(res[0].password);
+            console.log(res.length);
+            for (let i = 0; i < res.length; i++) {
+                if((res[i].nombre == document.getElementById('inputEmail').value) && (res[i].password == document.getElementById('inputPassword').value)){
+                    location.href = "inicio.html";
+                    console.log(res.length);
+                }
+            }
+            
+			
+		},
+		error:function(error){
+			console.log(error);
+		}
+	});
+    /*for (let i = 0; i < usuarios.length; i++) {
         if ((usuarios[i].usuario == document.getElementById('inputEmail').value) && (usuarios[i].password == document.getElementById('inputPassword').value)) {
             location.href = "inicio.html";
         } else {
             document.getElementById('error').style.display = 'block';
         }
-    }
+    }*/
 }
 
 /* llnar las categorias en la pagina de agregar categoria */
@@ -242,6 +263,7 @@ function fileValidation() {
                     document.getElementById('imagePreview').innerHTML = `<tr>
                     <td><img src="${e.target.result}" style="width: 50px; height: 40px;"/></td>
                     <td>` + fileInput.files[0].name + `</td>
+                    <td><button type="button" onclick="editar()">Subir</button></td>
                 </tr>`;
                     // llenarArchivos(fileInput.files[0].name, e.target.result);
                 };
@@ -251,6 +273,7 @@ function fileValidation() {
             conta++;
             reader.readAsDataURL(fileInput.files[0]);
         }
+        subirArchivo()
     }
 }
 /*funcion llenar select categorias en nueva entrada */
@@ -302,4 +325,55 @@ function registrarEntrada() {
         }
     }
     document.getElementById('entradaExito').style.display = 'block';
+}
+
+var tipo;
+function subir(){
+    console.log("holaa subi");
+    console.log(document.getElementById('arc').files[0].name);
+
+
+    var fileInput = document.getElementById('arc');
+    var filePath = fileInput.value;
+    var allowedExtensions = /(.jpg|.jpeg|.png|.gif)$/i;
+    if(!allowedExtensions.exec(filePath)){
+        tipo=false;
+    }else{
+        tipo=true;
+    }
+
+
+    let nombre= document.getElementById('arc').files[0].name;
+    let url='uploads/' + nombre;
+    let parametros = `url=${url}`;
+    console.log('Información a enviar: ' + parametros);
+    $.ajax({
+        url:'archivos/',
+        method:'POST',
+        data:parametros,
+        dataType:'json',
+        success:(res)=>{
+            console.log("inssrtooo...");
+            console.log(res);
+            anexarArchivo(url,nombre,res);
+        },
+        error:(error)=>{
+            console.log("eeeerrrrrtttttooo...");
+            console.error(error);
+        }
+    });
+}
+function anexarArchivo(url,nombre,res){
+    if (tipo==false) {
+        document.getElementById('imagePreview').innerHTML += `<tr>
+        <td><i class="fas fa-file-pdf"></i></td>
+        <td>${nombre}</td>
+        <td><button type="button" class="btn btn-danger" onclick="eliminar('${res._id}')"><i class="far fa-trash-alt iconot"></i></button></td>
+        </tr>`;
+    } else {
+        document.getElementById('imagePreview').innerHTML += `<tr>
+        <td><img src="${url}" style="width: 50px; height: 40px;"/></td>
+        <td>${nombre}</td>
+        </tr>`; 
+    }
 }

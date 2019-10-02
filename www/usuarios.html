@@ -143,7 +143,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="inputPassword4">Nobre de usuario</label>
-                                    <input type="text" class="form-control" id="usuario" placeholder="usuario">
+                                    <input type="text" class="form-control" id="nombreUsuario" placeholder="usuario">
                                     <div class="invalid-feedback">Se necesita nombre de usuario</div>
                                 </div>
                                 <div class="form-group">
@@ -154,9 +154,8 @@
                                 <div class="form-group">
                                     <label for="tipoUsuario">Tipo usuario</label>
                                     <select class="form-control mr-sm-2" id="tipoUsuario">
-                                                       <option>administrador</option>
-                                                       <option>Registrado</option>
-                                                       <option>Sin registrar</option>
+                                                       <option value="1">administrador</option>
+                                                       <option value="2">Registrado</option>
                                                 </select>
                                     <div class="invalid-feedback">Debe seleccionar una opcion</div>
                                 </div>
@@ -166,8 +165,12 @@
                                 <div id="error" class=" alert alert-danger " role="alert " style="display:none;">
                                     Debes asegurarte que ninguno de los campos no este vacio!
                                 </div>
-
-                                <center><button type="button" class="btn btn-primary col-md-6" onclick="validarRegistro()">Registrar</button></center>
+                                <center><div class="btn-group" role="group" aria-label="Basic example">
+                                    <button type="button" id="btn-limpiar" class="btn btn-success " onclick="limpiar()" style="display: none">Limpiar</button>
+                                    <button type="button" id="btn-actualizar" class="btn btn-secondary " onclick="actualizar()" style="display: none">Actualizar</button>
+                                </div></center>
+                                
+                                <center><button type="button" id="btn-registro" class="btn btn-primary col-md-6" onclick="registrarUsuario()">Registrar</button></center>
                             </form>
                         </div>
                     </div>
@@ -180,7 +183,7 @@
     <!-- Bootstrap core JavaScript -->
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/controlador.js"></script>
+    <script src="js/controlador-usuarios.js"></script>
 
     <!-- Menu Toggle Script -->
     <script>
