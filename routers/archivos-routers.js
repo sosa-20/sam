@@ -38,6 +38,21 @@ router.get('/',function(req,res){
     });
 });
 
+//obtener solo imagenes
+
+router.get('/imagenes',function(req,res){
+    archivo.find({
+        "tipo": "imagen"
+    })
+    .then((data)=>{
+        res.send(data);
+        res.end();
+    })
+    .catch((error)=>{
+        res.send(error);
+        res.end();
+    });
+});
 
 //eliminar archivo
 router.delete('/:id',function(req,res){

@@ -7,6 +7,7 @@ var database = require("./modules/database");
 var usuariosRouter = require('./routers/loggin-routers');
 var categoriasRouter = require('./routers/categorias-routers');
 var archivosRouter = require('./routers/archivos-routers');
+var entradasRouter = require('./routers/entradas-routers');
 
 var app = express();
 
@@ -41,6 +42,7 @@ app.post('/uploadjavatpoint',function(req,res){
 app.use('/categorias',categoriasRouter);
 app.use("/usuarios",usuariosRouter);
 app.use("/archivos",archivosRouter);
+app.use("/entradas",entradasRouter);
 
 app.use(express.static("www"));
 

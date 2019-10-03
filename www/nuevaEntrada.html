@@ -100,19 +100,26 @@
                                         <div class="invalid-feedback">Debe seleccionar una opcion</div>
                                     </div>
                                     <div class="form-group">
+                                        <label for="categoriaSelect">Seleccione una imagen</label>
+                                        <select class="form-control mr-sm-2" id="imagenSelect">
+                                           
+                                    </select>
+                                        <div class="invalid-feedback">Debe seleccionar una opcion</div>
+                                    </div>
+                                    <div class="form-group">
                                         <label for="categoriaSelect">Seleccione una categoria</label>
                                         <select class="form-control mr-sm-2" id="categoriaSelect">
                                            
                                     </select>
                                         <div class="invalid-feedback">Debe seleccionar una opcion</div>
                                     </div>
-                                    <textarea class="content" name="example"></textarea>
+                                    <textarea id="descripcionEntrada" class="content" name="example"></textarea>
 
                                 </div>
                                 <div class="form-group col-12">
                                     Comentarios<br>
-                                    <label><input name="comentariosOpcion" type="radio" value="S">Si</label>
-                                    <label><input name="comentariosOpcion" type="radio" value="M">No</label>
+                                    <label><input name="comentariosOpcion" value="1" type="radio" value="S">Si</label>
+                                    <label><input name="comentariosOpcion" value="0" type="radio" value="M">No</label>
                                 </div>
                                 <a href="paginaCreada.html" target="_blank">ver pagina</a><br>
 
@@ -125,6 +132,9 @@
                                 <button type="button" class="btn btn-primary col-md-6" onclick="registrarEntrada()">Agregar</button>
                                 <br>
                                 <hr>
+                                <div id="editor">
+                                    
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -140,7 +150,7 @@
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script type="text/javascript" src="src/jquery.richtext.js"></script>
         <script src="js/bootstrap.bundle.min.js"></script>
-        <script src="js/controlador.js"></script>
+        <script src="js/controlador-entradas.js"></script>
 
         <script>
             $(document).ready(function() {
