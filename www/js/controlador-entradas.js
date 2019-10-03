@@ -1,6 +1,60 @@
+
+if (document.getElementById('entradaReciente')) {
+    console.log("opteniendo");
+    ultimaEntrada();
+}
+
+function ultimaEntrada(){
+    $.ajax({
+        url:"entradas/ultima",
+        dataType:"json",
+		method:"GET",
+		success:function(res){
+            console.log(res);
+            anexarUltima(res[0]);
+		},
+		error:function(error){
+			console.log(error);
+		}
+	});
+}
+
+function anexarUltima(req){
+    document.getElementById('entradaReciente').innerHTML +=`
+             <div class="card col-6 iniciopag" style="margin-top: 50px;">
+                <img src="./${req.imagenId}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">${req.titulo}</h5>
+                  <p class="card-text">`+ req.descripcion + `</p>
+                  <a href="entradaCreada.html?id=${req._id}">ver mas...</a>
+                </div>
+           </div>`;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var comentariost = ['Manzana', 'Banana'];
 //llenar selec con las imagenes disponibles
-imagenesEntradas();
+
+if (document.getElementById('categoriaSelect') && document.getElementById('imagenSelect')) {
+    imagenesEntradas();
+    categorias();
+}
+
 function imagenesEntradas(){
     $.ajax({
         url:"archivos/imagenes",
@@ -21,14 +75,14 @@ function imagenesEntradas(){
 	});
 }
 function anexarimagenes(res){
-    document.getElementById('imagenSelect').innerHTML += `<option value="${res._id}">${res.nombreArchivo}</option>`;
+    document.getElementById('imagenSelect').innerHTML += `<option value="${res.url}">${res.nombreArchivo}</option>`;
     console.log(res._id);
 }
 
 
 
 //llenar select con las categorias
-categorias();
+
 function categorias(){
     document.getElementById('categoriaSelect').innerHTML =``;
     $.ajax({
@@ -49,7 +103,7 @@ function categorias(){
 	});
 }
 function llenarCategorias(res) {
-        document.getElementById('categoriaSelect').innerHTML += `<option value="${res._id}">${res.nombreCategoria}</option>`;
+        document.getElementById('categoriaSelect').innerHTML += `<option value="${res.nombreCategoria}">${res.nombreCategoria}</option>`;
 
 }
 
@@ -94,7 +148,7 @@ function registrarEntrada() {
    if (insertar=='si') {
         let entrada={
             titulo: document.getElementById('tituloEntrada').value,
-            idImagen: document.getElementById('imagenSelect').value,
+            imagenId: document.getElementById('imagenSelect').value,
             idCategoria: document.getElementById('categoriaSelect').value,
             descripcion: document.getElementById('descripcionEntrada').value,
             fechaPublicacion: f,
@@ -104,7 +158,8 @@ function registrarEntrada() {
         }
         console.log(entrada);
         //Guardar en el servidor
-    let parametros = `titulo=${entrada.titulo}&idImagen${entrada.idImagen}&idCategoria=${entrada.idCategoria}&descripcion=${entrada.descripcion}&fechaPublicacion=${entrada.fechaPublicacion}&comentarios=${entrada.comentarios}&autor=${entrada.autor}&permisoComentario=${entrada.permisoComentario}`;
+    let parametros = `titulo=${entrada.titulo}&imagenId=${entrada.imagenId}&idCategoria=${entrada.idCategoria}&descripcion=${entrada.descripcion}&fechaPublicacion=${entrada.fechaPublicacion}&comentarios=${entrada.comentarios}&autor=${entrada.autor}&permisoComentario=${entrada.permisoComentario}`;
+      
     console.log('Información a enviar: ' + parametros);
     $.ajax({
         url:'entradas/',
@@ -143,3 +198,4 @@ function marcarInput(id, valido) {
         document.getElementById(id).classList.add('is-invalid');
     }
 }
+
