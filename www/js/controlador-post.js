@@ -40,17 +40,74 @@ function anexarEntrada(res) {
       <p class="card-text"><small class="text-muted">publicado ${res.fechaPublicacion}</small></p>
       <hr>
       <h5 class="card-title">Comentarios</h5>
-      <p class="card-text">${res.comentarios[0]}</p>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <div id="comentariosp">
+         
+      </div>
       <hr>
       <div class="px-0">
             <div class="input-group mb-3">
               <input type="text" class="form-control" placeholder="Comment" id="comentario-post-1">
               <div class="input-group-append">
-                  <button type="button" onclick="comentar(${res._id});" class="btn btn-danger">publicar</button>
+                  <button type="button" onclick="comentar('${res._id}');" class="btn btn-danger">publicar</button>
               </div>
             </div>
           </div>
     </div>
   </div>`;
+}
+
+function comentar(id){
+  console.log(document.getElementById('comentario-post-1').value);
+  if(document.getElementById('comentario-post-1').value){
+    let comentario={
+      idEntrada:id,
+      autor:"soa96",
+      comentario:document.getElementById('comentario-post-1').value,
+    }
+    console.log(comentario);
+     let parametros = `idEntrada=${comentario.idEntrada}&autor=${comentario.autor}&comentario=${comentario.comentario}`;
+      console.log('Información a enviar: ' + parametros);
+      $.ajax({
+          url:'comentarios/',
+          method:'POST',
+          data:parametros,
+          dataType:'json',
+          success:(res)=>{
+              console.log("inssrtooo...");
+              console.log(res);
+              anexarComentario(res);
+          },
+          error:(error)=>{
+              console.log("eeeerrrrrtttttooo...");
+              console.error(error);
+          }
+      });
+  }
+}
+
+function anexarComentario(res){
+  document.getElementById('comentariosp').innerHTML +=`
+      <p class="card-text"><strong>${res.autor} </strong>${res.comentario}</p>
+  `;
+  console.log("anexando");
+}
+
+comentarios();
+function comentarios(){
+    $.ajax({
+        url:"/comentarios",
+        dataType:"json",
+		method:"GET",
+		success:function(res){
+            console.log(res.length);
+            for (let i = 0; i < res.length; i++) {
+                anexarComentario(res[i],i);
+            }
+            
+			
+		},
+		error:function(error){
+			console.log(error);
+		}
+	});
 }

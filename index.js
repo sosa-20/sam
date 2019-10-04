@@ -8,6 +8,7 @@ var usuariosRouter = require('./routers/loggin-routers');
 var categoriasRouter = require('./routers/categorias-routers');
 var archivosRouter = require('./routers/archivos-routers');
 var entradasRouter = require('./routers/entradas-routers');
+var comentariosRouter = require('./routers/comentarios-routers');
 
 var app = express();
 
@@ -43,6 +44,7 @@ app.use('/categorias',categoriasRouter);
 app.use("/usuarios",usuariosRouter);
 app.use("/archivos",archivosRouter);
 app.use("/entradas",entradasRouter);
+app.use("/comentarios",comentariosRouter);
 
 app.use(express.static("www"));
 
