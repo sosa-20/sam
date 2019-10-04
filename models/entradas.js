@@ -3,11 +3,10 @@ var mongoose = require('mongoose');
 //Schema: Define la estructura de los objetos que se guardaran en una coleccion.
 var esquema = new mongoose.Schema({
     titulo:String,
-    idImagen:String,
+    urlImagen:String,
     idCategoria:String,
     descripcion:String,
     fechaPublicacion:Date,
-    comentarios:Array,
     autor:String,
     permisoComentario:String,
 });

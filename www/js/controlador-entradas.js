@@ -22,7 +22,7 @@ function ultimaEntrada(){
 function anexarUltima(req){
     document.getElementById('entradaReciente').innerHTML +=`
              <div class="card col-6 iniciopag" style="margin-top: 50px;">
-                <img src="./${req.imagenId}" class="card-img-top" alt="...">
+                <img src="${req.imagenId}" class="card-img-top" alt="...">
                 <div class="card-body">
                   <h5 class="card-title">${req.titulo}</h5>
                   <p class="card-text">`+ req.descripcion + `</p>
@@ -75,7 +75,7 @@ function imagenesEntradas(){
 	});
 }
 function anexarimagenes(res){
-    document.getElementById('imagenSelect').innerHTML += `<option value="${res.url}">${res.nombreArchivo}</option>`;
+    document.getElementById('imagenSelect').innerHTML += `<option value="${res.nombreArchivo}">${res.nombreArchivo}</option>`;
     console.log(res._id);
 }
 
@@ -146,19 +146,20 @@ function registrarEntrada() {
         }
     }
    if (insertar=='si') {
+    let url='uploads/' + document.getElementById('imagenSelect').value;
+    console.log(url);
         let entrada={
             titulo: document.getElementById('tituloEntrada').value,
-            imagenId: document.getElementById('imagenSelect').value,
+            urlImagen: url,
             idCategoria: document.getElementById('categoriaSelect').value,
             descripcion: document.getElementById('descripcionEntrada').value,
             fechaPublicacion: f,
-            comentarios: comentariost,
             autor:"sosa96",
             permisoComentario: comentario
         }
         console.log(entrada);
         //Guardar en el servidor
-    let parametros = `titulo=${entrada.titulo}&imagenId=${entrada.imagenId}&idCategoria=${entrada.idCategoria}&descripcion=${entrada.descripcion}&fechaPublicacion=${entrada.fechaPublicacion}&comentarios=${entrada.comentarios}&autor=${entrada.autor}&permisoComentario=${entrada.permisoComentario}`;
+    let parametros = `titulo=${entrada.titulo}&urlImagen=${entrada.urlImagen}&idCategoria=${entrada.idCategoria}&descripcion=${entrada.descripcion}&fechaPublicacion=${entrada.fechaPublicacion}&autor=${entrada.autor}&permisoComentario=${entrada.permisoComentario}`;
       
     console.log('Información a enviar: ' + parametros);
     $.ajax({

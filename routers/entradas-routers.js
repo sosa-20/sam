@@ -7,12 +7,11 @@ router.post('/',function(req,res){
     let e = new entrada({
 
     titulo:req.body.titulo,
-    imagenId:req.body.imagenId,
+    urlImagen:req.body.urlImagen,
     idCategoria:req.body.idCategoria,
     descripcion:req.body.descripcion,
     fechaPublicacion:req.body.fechaPublicacion,
     autor:req.body.autor,
-    comentarios:req.body.comentarios,
     permisoComentario:req.body.permisoComentario
     }); 
 
