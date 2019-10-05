@@ -66,7 +66,7 @@ function subir(){
 }
 function anexarArchivo(res, id){
     if (res.tipo=='generico') {
-        document.getElementById(id).innerHTML += `<tr>
+        document.getElementById(id).innerHTML += `<tr id="${res._id}">
         <td><img src="img/genericos.png" style="width: 40px; height: 60px;"/></td>
         <td>sosa96</td>
         <td>${res.nombreArchivo}</td>
@@ -74,7 +74,7 @@ function anexarArchivo(res, id){
         <td><button type="button" class="btn btn-danger" onclick="eliminar('${res._id}')"><i class="far fa-trash-alt iconot"></i></button></td>
         </tr>`;
     } else {
-        document.getElementById(id).innerHTML += `<tr>
+        document.getElementById(id).innerHTML += `<tr id="${res._id}">
         <td><img src="${res.url}" style="width: 50px; height: 40px;"/></td>
         <td>sosa96</td>
         <td>${res.nombreArchivo}</td>
@@ -92,10 +92,6 @@ function eliminar(id){
         dataType:'json',
         success:(res)=>{
             console.log(res);
-            if (document.getElementById('bancoArchivo')) {
-                document.getElementById('bancoArchivo').innerHTML=``;
-                archivos();
-            }
             if (res.ok == 1)
                 $(`#${id}`).remove();
         },

@@ -1,7 +1,9 @@
-
+var idedit;
 if (document.getElementById('entradaReciente')) {
     console.log("opteniendo");
     ultimaEntrada();
+}else{
+    datosEntradas();
 }
 
 function ultimaEntrada(){
@@ -22,7 +24,7 @@ function ultimaEntrada(){
 function anexarUltima(req){
     document.getElementById('entradaReciente').innerHTML +=`
              <div class="card col-6 iniciopag" style="margin-top: 50px;">
-                <img src="${req.imagenId}" class="card-img-top" alt="...">
+                <img src="${req.urlImagen}" class="card-img-top" alt="...">
                 <div class="card-body">
                   <h5 class="card-title">${req.titulo}</h5>
                   <p class="card-text">`+ req.descripcion + `</p>
@@ -37,17 +39,6 @@ function anexarUltima(req){
 
 
 
-
-
-
-
-
-
-
-
-
-
-var comentariost = ['Manzana', 'Banana'];
 //llenar selec con las imagenes disponibles
 
 if (document.getElementById('categoriaSelect') && document.getElementById('imagenSelect')) {
@@ -114,7 +105,9 @@ entradas = [
 ];
 
 function registrarEntrada() {
-    var f = new Date();
+    var opt= new Date();
+  var fecha=opt.getDate()+'/'+(opt.getMonth()+1)+'/'+opt.getFullYear();
+  var hora=opt.getHours()+':'+opt.getMinutes()+':'+opt.getSeconds();
     var comentario;
     var proce=document.getElementsByName('comentariosOpcion');
     if (proce[0].checked) {
@@ -125,9 +118,6 @@ function registrarEntrada() {
     }
     console.log(comentario + " seleciono no");
     var insertar;
-    document.getElementById('editor').innerHTML=document.getElementById('descripcionEntrada').value;
-    console.log("editooo");
-    console.log( document.getElementById('editor').value);
     document.getElementById('entradaError').style.display = 'none';
     document.getElementById('entradaExito').style.display = 'none';
     console.log("holaaa");
@@ -153,13 +143,14 @@ function registrarEntrada() {
             urlImagen: url,
             idCategoria: document.getElementById('categoriaSelect').value,
             descripcion: document.getElementById('descripcionEntrada').value,
-            fechaPublicacion: f,
+            fechaPublicacion: fecha,
+            horaPublicacion: hora,
             autor:"sosa96",
             permisoComentario: comentario
         }
         console.log(entrada);
         //Guardar en el servidor
-    let parametros = `titulo=${entrada.titulo}&urlImagen=${entrada.urlImagen}&idCategoria=${entrada.idCategoria}&descripcion=${entrada.descripcion}&fechaPublicacion=${entrada.fechaPublicacion}&autor=${entrada.autor}&permisoComentario=${entrada.permisoComentario}`;
+    let parametros = `titulo=${entrada.titulo}&urlImagen=${entrada.urlImagen}&idCategoria=${entrada.idCategoria}&descripcion=${entrada.descripcion}&fechaPublicacion=${entrada.fechaPublicacion}&horaPublicacion=${entrada.horaPublicacion}&autor=${entrada.autor}&permisoComentario=${entrada.permisoComentario}`;
       
     console.log('Información a enviar: ' + parametros);
     $.ajax({
@@ -200,3 +191,296 @@ function marcarInput(id, valido) {
     }
 }
 
+
+function datosEntradas(){
+    $.ajax({
+        url:"/entradas",
+        dataType:"json",
+		method:"GET",
+		success:function(res){
+            console.log(res.length);
+            for (let i = res.length; i > 0; i--) {
+                console.log(res[i-1]._id);
+                cantidadComentarios(res[i-1]);
+                //anexarEntrada(res[i-1]);
+                /*comentarios(res[i-1]._id);
+                console.log(res[i-1]);*/
+            }
+		},
+		error:function(error){
+			console.log(error);
+		}
+	});
+}
+
+function anexarEntrada(res,ctd){
+    
+    document.getElementById('todasEntradas').innerHTML += `<tr id="${res._id}">
+        <td onclick="verPost('${res._id }')">${res.titulo}</td>
+        <td>${res.autor}</td>
+        <td>${res.idCategoria}</td>
+        <td id="numeroComentarios">${ctd}</td>
+        <td>${res.fechaPublicacion}</td>
+        <td><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal" onclick="editarPost('${res._id}')"><i class="far fa-edit iconot"></i></button>
+        <button type="button" class="btn btn-danger" onclick="eliminar('${res._id }','${ctd}')"><i class="far fa-trash-alt iconot"></i></button></td>
+        </tr>`;
+}
+
+
+function cantidadComentarios(id){
+    ctd=0;
+    $.ajax({
+        url:"/comentarios",
+        dataType:"json",
+		method:"GET",
+		success:function(res){
+            console.log(res.length);
+            let ctd=0;
+            for (let i = 0;i<res.length; i++) {
+              if (res[i].idEntrada == id._id) {
+                ctd=ctd+1;
+              }
+            }
+            anexarEntrada(id,ctd)
+            console.log(id+"cantida de coment"+ctd);
+		},
+		error:function(error){
+			console.log(error);
+		}
+	});
+}
+function eliminar(id, ctd){
+    console.log(ctd);
+    $.ajax({
+        url:`entradas/${id}`,
+        method:'delete',
+        dataType:'json',
+        success:(res)=>{
+            eliminarComentarios(id);
+            console.log(res);
+            if (res.ok == 1)
+                $(`#${id}`).remove();
+        },
+        error:(error)=>{
+            console.error(error);
+        }
+    });
+}
+
+function eliminarComentarios(id){
+    console.log("lleeeeee1");
+    $.ajax({
+        url:"/comentarios",
+        dataType:"json",
+		method:"GET",
+		success:function(res){
+            console.log(res.length);
+            let ctd=0;
+            for (let i = 0;i<res.length; i++) {
+              if (res[i].idEntrada == id) {
+                eliminando(res[i]._id);
+              }
+            }
+		},
+		error:function(error){
+			console.log(error);
+		}
+	});
+   
+}
+function eliminando(id) {
+    console.log("lleeeeee2");
+    $.ajax({
+        url:`comentarios/${id}`,
+        method:'delete',
+        dataType:'json',
+        success:(res)=>{
+            console.log(res);
+        },
+        error:(error)=>{
+            console.error(error);
+        }
+    });
+}
+
+function editarPost(id) {
+    console.log(id);
+    $.ajax({
+     url:`entradas/${id}`,
+     method:'GET',
+     dataType:'json',
+     success:(entrada)=>{
+        var arrayDeCadenas = entrada.urlImagen.split('/');
+        imag=arrayDeCadenas[arrayDeCadenas.length-1];
+        var proce=document.getElementsByName('comentariosOpcion');
+        if (entrada.permisoComentario=='1') {
+            proce[0].checked;
+            document.getElementsByName('comentariosOpcion')[0].checked=true;
+            //comentario=proce[0].value;
+        }
+        if (entrada.permisoComentario=='0') {
+            proce[1].checked;
+            document.getElementsByName('comentariosOpcion')[1].checked=true;
+            //comentario=proce[1].value;
+        }
+         imagen=
+        document.getElementById('tituloEntrada').value=entrada.titulo;
+        document.getElementById('imagenSelect').value=imag;
+        document.getElementById('categoriaSelect').value=entrada.idCategoria;
+        document.getElementById('descripcionEntrada').value=entrada.descripcion;
+        //permisoComentario: comentario
+    },
+    error:(error)=>{
+        console.error(error);
+    }
+});
+idedit=id;
+}
+
+function actualizar() {
+    console.log(idedit);
+    var opt= new Date();
+  var fecha=opt.getDate()+'/'+(opt.getMonth()+1)+'/'+opt.getFullYear();
+  var hora=opt.getHours()+':'+opt.getMinutes()+':'+opt.getSeconds();
+    var comentario;
+    var proce=document.getElementsByName('comentariosOpcion');
+    if (proce[0].checked) {
+        comentario=proce[0].value;
+    }
+    if (proce[1].checked) {
+        comentario=proce[1].value;
+    }
+    console.log(comentario + " seleciono no");
+    var insertar;
+    console.log("editooo");
+    document.getElementById('entradaError').style.display = 'none';
+    document.getElementById('entradaExito').style.display = 'none';
+    console.log("holaaa");
+    for (let i = 0; i < entradas.length; i++)
+        entradas[i].valido = validarCampoVacio(entradas[i].id);
+     
+    console.log(entradas);
+    for (let i = 0; i < entradas.length; i++) {
+        if (!entradas[i].valido) {
+            document.getElementById('entradaError').style.display = 'block';
+            return;
+        }
+        else{
+            insertar='si';
+            console.log("si se puede");
+        }
+    }
+   if (insertar=='si') {
+    let url='uploads/' + document.getElementById('imagenSelect').value;
+    console.log(url);
+        let entrada={
+            titulo: document.getElementById('tituloEntrada').value,
+            urlImagen: url,
+            idCategoria: document.getElementById('categoriaSelect').value,
+            descripcion: document.getElementById('descripcionEntrada').value,
+            fechaPublicacion: fecha,
+            horaPublicacion: hora,
+            autor:"sosa96",
+            permisoComentario: comentario
+        }
+        console.log(entrada);
+        //Guardar en el servidor
+    let parametros = `titulo=${entrada.titulo}&urlImagen=${entrada.urlImagen}&idCategoria=${entrada.idCategoria}&descripcion=${entrada.descripcion}&fechaPublicacion=${entrada.fechaPublicacion}&horaPublicacion=${entrada.horaPublicacion}&autor=${entrada.autor}&permisoComentario=${entrada.permisoComentario}`;
+      
+    console.log('Información a enviar: ' + parametros);
+    $.ajax({
+        url:`entradas/${idedit}`,
+        method:'PUT',
+        data:parametros,
+        dataType:'json',
+        success:(res)=>{
+            console.log(res);
+            document.getElementById('todasEntradas').innerHTML=``;
+            datosEntradas();
+                        /*if (res._id != undefined)
+                anexarFilaTabla(res);*/
+                /*document.getElementById('respuesta').innerHTML=``;*/
+        },
+        error:(error)=>{
+            console.error(error);
+        }
+    });
+   }
+}
+
+function verPost(id){
+    $('#postmodal').modal('show');
+    console.log(id);
+    $.ajax({
+        url:`entradas/${id}`,
+        method:'GET',
+        dataType:'json',
+        success:(res)=>{
+            console.log(res);
+            
+            anexarModal(res);
+        },
+        error:(error)=>{
+            console.error(error);
+        }
+    });
+   
+}
+function anexarModal(res) {
+    if (res.permisoComentario=='1') {
+      document.getElementById('entradaPost').innerHTML +=`
+      <div class="card col-12 ">
+      <img src="${res.urlImagen}" class="card-img" style="opacity: 0.7;" alt="...">
+      <div class="card-img-overlay">
+              <center><h1 class="card-title">${res.titulo}</h5></center>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">`+ res.descripcion+`</h5>
+        <p class="card-text"><strong>Categoria: </strong>${res.idCategoria}</p>
+        <p class="card-text"><small class="text-muted">publicado ${res.fechaPublicacion}</small></p>
+        <hr>
+        <h5 class="card-title">Comentarios</h5>
+        <div id="comentariosp${res._id}">
+           
+        </div>
+        <hr>
+        <div class="px-0">
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Comment" id="comentario-post-${res._id}">
+                <div class="input-group-append">
+                    <button type="button" onclick="comentar('${res._id}');" class="btn btn-danger">Comentar</button>
+                </div>
+              </div>
+            </div>
+      </div>
+    </div><br>`;
+    }else{
+      document.getElementById('entradaReciente').innerHTML +=`
+      <div class="card col-12 ">
+      <img src="${res.urlImagen}" class="card-img" style="opacity: 0.7;" alt="...">
+      <div class="card-img-overlay">
+              <center><h1 class="card-title">${res.titulo}</h5></center>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">`+ res.descripcion+`</h5>
+        <p class="card-text"><strong>Categoria: </strong>${res.idCategoria}</p>
+        <p class="card-text"><small class="text-muted">publicado ${res.fechaPublicacion}</small></p>
+        <hr>
+        <h5 class="card-title" style="display: none">Comentarios</h5>
+        <div id="comentariosp${res._id}">
+           
+        </div>
+        <hr style="display: none">
+        <div class="px-0"  style="display: none">
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Comment" id="comentario-post-${res._id}">
+                <div class="input-group-append">
+                    <button type="button" onclick="comentar('${res._id}');" class="btn btn-danger">Comentar</button>
+                </div>
+              </div>
+            </div>
+      </div>
+    </div><br>`;
+    }
+      
+  }

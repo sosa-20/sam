@@ -93,6 +93,11 @@ function anexarEntrada(res) {
 }
 
 function comentar(id){
+  var opt= new Date();
+  var fecha=opt.getDate()+'/'+(opt.getMonth()+1)+'/'+opt.getFullYear();
+  var hora=opt.getHours()+':'+opt.getMinutes()+':'+opt.getSeconds();
+  console.log(fecha);
+  console.log(hora);
   console.log(document.getElementById(`comentario-post-${id}`).value);
   if(document.getElementById(`comentario-post-${id}`).value){
     let comentario={
@@ -101,7 +106,7 @@ function comentar(id){
       comentario:document.getElementById(`comentario-post-${id}`).value,
     }
     console.log(comentario);
-     let parametros = `idEntrada=${comentario.idEntrada}&autor=${comentario.autor}&comentario=${comentario.comentario}`;
+     let parametros = `idEntrada=${comentario.idEntrada}&autor=${comentario.autor}&comentario=${comentario.comentario}&fecha=${fecha}&hora=${hora}`;
       console.log('Información a enviar: ' + parametros);
       $.ajax({
           url:'comentarios/',
@@ -143,8 +148,6 @@ function comentarios(id){
                 anexarComentario(res[i-1],id);
               }
             }
-            
-			
 		},
 		error:function(error){
 			console.log(error);

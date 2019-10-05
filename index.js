@@ -31,9 +31,9 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.post('/uploadjavatpoint',function(req,res){  
     upload(req,res,function(err) {  
         if(err) {  
-            return res.end("Error uploading file.");  
+            return res.end("error al subir archivo.");  
         }  
-        res.end("File is uploaded successfully!");  
+        res.end("agregado con exito!");  
     });  
 });
 

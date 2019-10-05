@@ -4,7 +4,9 @@ var mongoose = require('mongoose');
 var esquema = new mongoose.Schema({
     idEntrada:String,
     autor:String,
-    comentario:String
+    comentario:String,
+    fecha:String,
+    hora:String
 });
 
 //El primer parametro tiene que ser el nombre de la coleccion en mongo (puede ser el singular)

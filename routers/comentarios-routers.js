@@ -9,7 +9,9 @@ router.post('/',function(req,res){
 
     idEntrada:req.body.idEntrada,
     autor:req.body.autor,
-    comentario:req.body.comentario
+    comentario:req.body.comentario,
+    fecha:req.body.fecha,
+    hora:req.body.hora
     }); 
 
     //Promesa
@@ -36,6 +38,20 @@ router.get('/',function(req,res){
         res.end();
     });
 });
+
+//eliminar comentario
+router.delete('/:id',function(req,res){
+    comentario.remove({_id:req.params.id})
+    .then((result)=>{
+        res.send(result);
+        res.end();
+    })
+    .catch((error)=>{
+        res.send(error);
+        res.end();
+    });
+});
+
 
 
 

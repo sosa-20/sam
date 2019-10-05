@@ -11,6 +11,7 @@ router.post('/',function(req,res){
     idCategoria:req.body.idCategoria,
     descripcion:req.body.descripcion,
     fechaPublicacion:req.body.fechaPublicacion,
+    horaPublicacion:req.body.horaPublicacion,
     autor:req.body.autor,
     permisoComentario:req.body.permisoComentario
     }); 
@@ -65,8 +66,43 @@ router.get('/:id',function(req,res){
     });
 });
 
+//eliminar entrada
+router.delete('/:id',function(req,res){
+    entrada.remove({_id:req.params.id})
+    .then((result)=>{
+        res.send(result);
+        res.end();
+    })
+    .catch((error)=>{
+        res.send(error);
+        res.end();
+    });
+});
 
-
+//actualiza categoria
+router.put('/:id',function(req,res){
+    entrada.update(
+        {_id:req.params.id},
+        {
+           titulo:req.body.titulo,
+           urlImagen:req.body.urlImagen,
+           idCategoria:req.body.idCategoria,
+           descripcion:req.body.descripcion,
+           fechaPublicacion:req.body.fechaPublicacion,
+           horaPublicacion:req.body.horaPublicacion,
+           autor:req.body.autor,
+           permisoComentario:req.body.permisoComentario
+         }
+    )
+    .then((result)=>{
+         res.send(result);
+         res.end();
+    })
+    .catch((error)=>{
+         res.send(error);
+         res.end();
+    });
+ });
 
 module.exports = router;
 

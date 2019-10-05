@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="img/log.png" type="image/png">
+
+    <title>SAM</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="src/richtext.min.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+    <div class="d-flex" id="wrapper">
+
+        <!-- Sidebar -->
+        <div class="bg-light border-right" id="sidebar-wrapper">
+            <a href="inicio.html"><img src="img/logo1.png" alt=""></a>
+            <div class="list-group list-group-flush">
+
+                <a href="usuarios.html" class="list-group-item list-group-item-action bg-light"><i class="fas fa-users"></i>   Usuarios</a>
+
+                <a class="list-group-item list-group-item-action bg-light" data-toggle="collapse" href="#multiCollapseExample2" role="button" aria-expanded="false" aria-controls="multiCollapseExample2"><i class="fas fa-camera"></i>  Multimedia <i class="fas fa-angle-down"></i></a>
+                <div class="row">
+                    <div class="col">
+                        <div class="collapse multi-collapse" id="multiCollapseExample2">
+
+                            <ul class="list-group">
+                                <li class="">
+                                    <a href="subirArchivo.html" class="list-group-item list-group-item-action color-sublist">Subir</a>
+                                    <a href="bancoArchivos.html" class="list-group-item list-group-item-action color-sublist">Ver banco</a>
+
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <a href="comentarios.html" class="list-group-item list-group-item-action bg-light"><i class="fas fa-sticky-note"></i>   Comentarios</a>
+                <a class="list-group-item list-group-item-action bg-light" data-toggle="collapse" href="#entradas" role="button" aria-expanded="false" aria-controls="multiCollapseExample1"><i class="fas fa-pen-square"></i>   Entradas  <i class="fas fa-angle-down"></i></a>
+                <div class="row">
+                    <div class="col">
+                        <div class="collapse multi-collapse" id="entradas">
+
+                            <ul class="list-group">
+                                <li class="">
+                                    <a href="nuevaEntrada.html" class="list-group-item list-group-item-action color-sublist">Nueva entrada</a>
+                                    <a href="verPost.html" class="list-group-item list-group-item-action color-sublist">Ver Entradas</a>
+                                    <a href="categorias.html" class="list-group-item list-group-item-action color-sublist">Crear categoria</a>
+
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <a href="editores.html" class="list-group-item list-group-item-action bg-light"><i class="far fa-edit"></i>   Editores</a>
+            </div>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                <button class="btn btn-primary" id="menu-toggle"> Menu</button>
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto mt-2 mt-lg-0" id="sesion">
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="container">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Entradas</a></li>
+                    </ol>
+                </nav>
+                <h1 class="mt-4">Entradas</h1>
+
+                <main>
+                    <div class="container">
+                        <!--<i class="fas fa-image"></i> !-->
+                        <div class="row">
+                            <div class="table-responsive banco">
+                                <table class="table table-striped container" id="dataTables-example">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Titulo</th>
+                                            <th scope="col">Autor</th>
+                                            <th scope="col" class="fila">Categoria</th>
+                                            <th scope="col"># comentarios</th>
+                                            <th scope="col">fecha</th>
+                                            <th scope="col">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="todasEntradas">
+                                       
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+        <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Editar entrada</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <form>
+                                    <div class="page-wrapper box-content">
+                                        <div class="form-group">
+                                            <label for="categoriaSelect">Ingrese un titulo</label>
+                                            <input type="text" class="form-control" id="tituloEntrada" placeholder="titulo">
+                                            <div class="invalid-feedback">Debe seleccionar una opcion</div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="categoriaSelect">Seleccione una imagen</label>
+                                            <select class="form-control mr-sm-2" id="imagenSelect">
+                                               
+                                        </select>
+                                            <div class="invalid-feedback">Debe seleccionar una opcion</div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="categoriaSelect">Seleccione una categoria</label>
+                                            <select class="form-control mr-sm-2" id="categoriaSelect">
+                                               
+                                        </select>
+                                            <div class="invalid-feedback">Debe seleccionar una opcion</div>
+                                        </div>
+                                        <textarea id="descripcionEntrada" class="content" name="example"></textarea>
+    
+                                    </div>
+                                    <div class="form-group col-12">
+                                        Comentarios<br>
+                                        <label><input name="comentariosOpcion" value="1" type="radio" value="S">Si</label>
+                                        <label><input name="comentariosOpcion" value="0" type="radio" value="M">No</label>
+                                    </div>
+    
+                                    <div id="entradaError" class=" alert alert-danger " role="alert " style="display:none;">
+                                        Debes asegurarte que ninguno de los campos no este vacio!
+                                    </div>
+                                    <div id="entradaExito" class="alert alert-success" role="alert " style="display:none;">
+                                        Entrada registrada con exito!
+                                    </div>
+                                    <center><div class="btn-group" role="group" aria-label="Basic example">
+                                        <button type="button" id="btn-limpiar" class="btn btn-success " onclick="limpiar()">Limpiar</button>
+                                        <button type="button" id="btn-actualizar" class="btn btn-secondary " onclick="actualizar()">Actualizar</button>
+                                    </div></center>
+                                    <br>
+                                    <hr>
+                                </form>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+
+        <!-- Modal post-->
+        <div class="modal fade" id="postmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Entrada Seleccionada</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="row" id="entradaPost">
+                               
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        </div>
+    <!-- /#wrapper -->
+
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script type="text/javascript" src="src/jquery.richtext.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/controlador-entradas.js"></script>
+
+    <!-- Menu Toggle Script -->
+    <script>
+        $("#menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+        $(document).ready(function() {
+            $('#dataTables-example').DataTable({
+                responsive: true
+            });
+        });
+            $(document).ready(function() {
+                $('.content').richText();
+            });
+    </script>
+
+</body>
+
+</html>

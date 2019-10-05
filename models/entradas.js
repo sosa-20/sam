@@ -6,7 +6,8 @@ var esquema = new mongoose.Schema({
     urlImagen:String,
     idCategoria:String,
     descripcion:String,
-    fechaPublicacion:Date,
+    fechaPublicacion:String,
+    horaPublicacion:String,
     autor:String,
     permisoComentario:String,
 });
