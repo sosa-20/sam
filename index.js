@@ -1,5 +1,5 @@
 
-var express = require("express");
+var express = require("express"),session = require('express-session');
 var multer  =   require('multer');  
 var bodyParser = require("body-parser");
 var database = require("./modules/database");
@@ -37,17 +37,17 @@ app.post('/uploadjavatpoint',function(req,res){
     });  
 });
 
-//
 
+///////
 
-app.use('/categorias',categoriasRouter);
-app.use("/usuarios",usuariosRouter);
-app.use("/archivos",archivosRouter);
-app.use("/entradas",entradasRouter);
-app.use("/comentarios",comentariosRouter);
+app.use('/categorias', categoriasRouter);
+app.use("/usuarios", usuariosRouter);
+app.use("/archivos", archivosRouter);
+app.use("/entradas", entradasRouter);
+app.use("/comentarios", comentariosRouter);
 
 app.use(express.static("www"));
 
-app.listen(3335,function(){
+app.listen(3336,function(){
     console.log("Servidor en linea");
 });

@@ -1,4 +1,5 @@
 var tipo;
+var autor;
 
 if (document.getElementById('bancoArchivo')) {
     archivos();
@@ -42,11 +43,18 @@ function subir(){
     }else{
         tipo='imagen';
     }
-
-
+    
+    console.log(autor+" est es el autor");
     let nombre= document.getElementById('arc').files[0].name;
     let url='uploads/' + nombre;
-    let parametros = `url=${url}&nombreArchivo=${nombre}&fechaSubida=${fecha}&tipo=${tipo}`;
+    let archivo={
+        url:url,
+        nombreArchivo:nombre,
+        fechaSubida: fecha,
+        tipo:tipo,
+        autor:autor
+    }
+    let parametros = `url=${archivo.url}&nombreArchivo=${archivo.nombreArchivo}&fechaSubida=${archivo.fechaSubida}&tipo=${tipo}&autor=${archivo.autor}`;
     console.log('Información a enviar: ' + parametros);
     $.ajax({
         url:'archivos/',
@@ -76,7 +84,7 @@ function anexarArchivo(res, id){
     } else {
         document.getElementById(id).innerHTML += `<tr id="${res._id}">
         <td><img src="${res.url}" style="width: 50px; height: 40px;"/></td>
-        <td>sosa96</td>
+        <td>${res.autor}</td>
         <td>${res.nombreArchivo}</td>
         <td>${res.fechaSubida}</td>
 		<td><button type="button" class="btn btn-danger" onclick="eliminar('${res._id}')"><i class="far fa-trash-alt iconot"></i></button></td>
@@ -100,3 +108,20 @@ function eliminar(id){
         }
     });
 }
+nombreUsuario();
+function nombreUsuario(){
+    $.ajax({
+        url:`usuarios/secion`,
+        method:'POST',
+        success:(res)=>{
+            console.log("inssrtooo...");
+            document.getElementById('sesion').innerHTML=`${res}`;
+            console.log(res);
+            autor=res;
+        },
+        error:(error)=>{
+            console.log("eeeerrrrrtttttooo...");
+            console.error(error);
+        }
+    });
+  }

@@ -1,8 +1,10 @@
 var idedit;
+nombreUsuario();
 if (document.getElementById('entradaReciente')) {
     console.log("opteniendo");
     ultimaEntrada();
-}else{
+    ctdComentarios();
+}else if (document.getElementById('todasEntradas')){
     datosEntradas();
 }
 
@@ -44,6 +46,7 @@ function anexarUltima(req){
 if (document.getElementById('categoriaSelect') && document.getElementById('imagenSelect')) {
     imagenesEntradas();
     categorias();
+    var usuarion;
 }
 
 function imagenesEntradas(){
@@ -105,6 +108,8 @@ entradas = [
 ];
 
 function registrarEntrada() {
+    nombreUsuario();
+       console.log("este es nombre usuario"+usuarion);
     var opt= new Date();
   var fecha=opt.getDate()+'/'+(opt.getMonth()+1)+'/'+opt.getFullYear();
   var hora=opt.getHours()+':'+opt.getMinutes()+':'+opt.getSeconds();
@@ -136,6 +141,7 @@ function registrarEntrada() {
         }
     }
    if (insertar=='si') {
+       
     let url='uploads/' + document.getElementById('imagenSelect').value;
     console.log(url);
         let entrada={
@@ -145,7 +151,7 @@ function registrarEntrada() {
             descripcion: document.getElementById('descripcionEntrada').value,
             fechaPublicacion: fecha,
             horaPublicacion: hora,
-            autor:"sosa96",
+            autor:usuarion,
             permisoComentario: comentario
         }
         console.log(entrada);
@@ -304,12 +310,15 @@ function eliminando(id) {
 }
 
 function editarPost(id) {
+    document.getElementById('descripcionEntrada').value=``;
+    $("#descripcionEntrada").val(''); 
     console.log(id);
     $.ajax({
      url:`entradas/${id}`,
      method:'GET',
      dataType:'json',
      success:(entrada)=>{
+        document.getElementById('descripcionEntrada').value=``;
         var arrayDeCadenas = entrada.urlImagen.split('/');
         imag=arrayDeCadenas[arrayDeCadenas.length-1];
         var proce=document.getElementsByName('comentariosOpcion');
@@ -323,7 +332,6 @@ function editarPost(id) {
             document.getElementsByName('comentariosOpcion')[1].checked=true;
             //comentario=proce[1].value;
         }
-         imagen=
         document.getElementById('tituloEntrada').value=entrada.titulo;
         document.getElementById('imagenSelect').value=imag;
         document.getElementById('categoriaSelect').value=entrada.idCategoria;
@@ -427,6 +435,7 @@ function verPost(id){
    
 }
 function anexarModal(res) {
+    document.getElementById('entradaPost').innerHTML =``;
     if (res.permisoComentario=='1') {
       document.getElementById('entradaPost').innerHTML +=`
       <div class="card col-12 ">
@@ -444,7 +453,7 @@ function anexarModal(res) {
            
         </div>
         <hr>
-        <div class="px-0">
+        <div class="px-0" style="display: none">
               <div class="input-group mb-3">
                 <input type="text" class="form-control" placeholder="Comment" id="comentario-post-${res._id}">
                 <div class="input-group-append">
@@ -482,5 +491,104 @@ function anexarModal(res) {
       </div>
     </div><br>`;
     }
-      
+    comentarios(res._id); 
   }
+
+  function comentarios(id){
+    console.log("este es un id "+id);
+      $.ajax({
+          url:"/comentarios",
+          dataType:"json",
+          method:"GET",
+          success:function(res){
+              console.log(res.length);
+              for (let i = res.length; i >0 ; i--) {
+                if (res[i-1].idEntrada == id) {
+                  anexarComentario(res[i-1],id);
+                }
+              }
+          },
+          error:function(error){
+              console.log(error);
+          }
+      });
+  }
+  function anexarComentario(res,id){
+    document.getElementById(`comentariosp${id}`).innerHTML +=`
+        <p class="card-text"><strong>${res.autor} </strong>${res.comentario}</p>
+    `;
+    console.log("anexando");
+  }
+
+  function nombreUsuario(){
+    $.ajax({
+        url:`usuarios/secion`,
+        method:'POST',
+        success:(res)=>{
+            console.log("inssrtooo...");
+            document.getElementById('sesion').innerHTML=`${res}`;
+            console.log(res);
+            usuarion=res;
+        },
+        error:(error)=>{
+            console.log("eeeerrrrrtttttooo...");
+            console.error(error);
+        }
+    });
+  }
+  function ctdComentarios(){
+    $.ajax({
+        url:"/comentarios",
+        dataType:"json",
+		method:"GET",
+		success:function(res){
+            console.log(res.length);
+            ctd=res.length;
+            document.getElementById('ctdComentarios').innerHTML=`<i class="fas fa-arrow-right"></i> (${ctd})
+            <a href="#">comentarios</a>`;
+		},
+		error:function(error){
+			console.log(error);
+		}
+    });
+    
+    $.ajax({
+        url:"/usuarios",
+        dataType:"json",
+		method:"GET",
+		success:function(res){
+           ctd=res.length;
+           document.getElementById('ctdUsuarios').innerHTML=`<i class="fas fa-arrow-right"></i> (${ctd})
+            <a href="#">Usuarios</a>`;
+		},
+		error:function(error){
+			console.log(error);
+		}
+    });
+    $.ajax({
+        url:"/entradas",
+        dataType:"json",
+		method:"GET",
+		success:function(res){
+            ctd=res.length;
+           document.getElementById('ctdEntradas').innerHTML=`<i class="fas fa-arrow-right"></i> (${ctd})
+            <a href="#">Entradas</a>`;
+		},
+		error:function(error){
+			console.log(error);
+		}
+    });
+    $.ajax({
+        url:"/categorias",
+        dataType:"json",
+		method:"GET",
+		success:function(res){
+            ctd=res.length;
+           document.getElementById('ctdCategorias').innerHTML=`<i class="fas fa-arrow-right"></i> (${ctd})
+            <a href="#">Categorias</a>`;
+		},
+		error:function(error){
+			console.log(error);
+		}
+	});
+}

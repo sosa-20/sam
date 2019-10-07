@@ -41,16 +41,16 @@
         </div>
     </nav>
     <main class="main">
-        <form class="form-signin img inicioConfig">
+        <form class="form-signin img inicioConfig" id="datoslog">
             <img src="img/log.png" alt="">
             <h1 class="h3 mb-3 font-weight-normal sam">Iniciar Secion con SAM</h1>
             <label for="inputEmail" class="sr-only">Email address</label>
-            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+            <input type="email" id="inputEmail" name="nombreUsuario" class="form-control" placeholder="Email address" required autofocus>
             <label for="inputPassword" class="sr-only">Password</label>
             <div id="passs">
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
             </div>
-            <button class="btn btn-lg btn-primary btn-block" type="button" onclick="acceso()">Sign in</button>
+            <button class="btn btn-lg btn-primary btn-block" type="button"  id="btn-registro">Sign in</button>
             <div id="error" class=" alert alert-danger " role="alert " style="display:none;">
                 usuario o contrasenia incorecta!
             </div>

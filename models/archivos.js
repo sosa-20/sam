@@ -5,7 +5,8 @@ var esquema = new mongoose.Schema({
     url:String,
     nombreArchivo:String,
     fechaSubida:String,
-    tipo:String
+    tipo:String,
+    autor:String
 });
 
 //El primer parametro tiene que ser el nombre de la coleccion en mongo (puede ser el singular)

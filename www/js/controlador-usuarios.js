@@ -222,3 +222,21 @@ function limpiar(){
         document.getElementById('btn-limpiar').style.display = 'none';
         document.getElementById('btn-registro').style.display = 'block';
 }
+
+nombreUsuario();
+function nombreUsuario(){
+    $.ajax({
+        
+        url:`usuarios/secion`,
+        method:'POST',
+        success:(res)=>{
+            console.log("inssrtooo...");
+            document.getElementById('sesion').innerHTML=`${res}`;
+            console.log(res);
+        },
+        error:(error)=>{
+            console.log("eeeerrrrrtttttooo...");
+            console.error(error);
+        }
+    });
+  }

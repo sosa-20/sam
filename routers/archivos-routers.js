@@ -10,7 +10,8 @@ router.post('/',function(req,res){
         url:req.body.url,
         nombreArchivo:req.body.nombreArchivo,
         fechaSubida:req.body.fechaSubida,
-        tipo:req.body.tipo
+        tipo:req.body.tipo,
+        autor:req.body.autor
     }); 
 
     //Promesa

@@ -1,7 +1,9 @@
 var express = require('express');
+var session = require('express-session');
 var usuario = require('../models/loggin');
 var router = express.Router();
 
+router.use(session({secret:"ASDFE$%#%",resave:true, saveUninitialized:true}));
 //Guardar un usuario
 router.post('/',function(req,res){
     let u = new usuario({
@@ -90,5 +92,31 @@ router.put('/:id',function(req,res){
          res.end();
     });
  });
+
+/* verificar secion y crear variables de secion*/
+ router.post("/login",function(req, res){
+
+    usuario.find({nombreUsuario:req.body.nombreUsuario, password:req.body.password})
+    .then((data)=>{
+        if (data.length==1){//Significa que si encontro un usuario con las credenciales indicadas
+            //Establecer las variables de sesion
+            req.session.codigoUsuario = data[0]._id;
+            req.session.nombreUsuario =  data[0].nombreUsuario;
+            req.session.codigoTipoUsuario = data[0].tipoUsuario;
+            res.send({status:1,mensaje:"Usuario autenticado con éxito", usuario:data[0]});
+        }else{
+            res.send({status:0,mensaje:"Credenciales inválidas"});
+        }
+        
+    })
+    .catch(error=>{
+        res.send(error);
+    }); 
+  });
+
+  router.post("/secion",function(req, res){
+
+    res.send(req.session.nombreUsuario)
+  });
 
 module.exports = router;
