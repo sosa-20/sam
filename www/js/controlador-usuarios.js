@@ -28,7 +28,7 @@ function anexarUsuario(req,i) {
         <div class="card-body">
             <p class="card-text">${req.nombre} ${req.apellido}</p>
             <p class="card-text">${req.email}</p>
-            <p class="card-text">sadsda</p>
+            <p class="card-text">${req.tipoUsuario}</p>
             <p>
                 <a data-toggle="collapse" href="#opciones${i}" role="button" aria-expanded="false" aria-controls="opciones${i}">opciones</a>
             </p>

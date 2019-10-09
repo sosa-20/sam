@@ -26,6 +26,7 @@ function ultimaEntrada(){
 function anexarUltima(req){
     document.getElementById('entradaReciente').innerHTML +=`
              <div class="card col-6 iniciopag" style="margin-top: 50px;">
+             <center><h5 class="card-title">Tu ultima entrada</h5></center>
                 <img src="${req.urlImagen}" class="card-img-top" alt="...">
                 <div class="card-body">
                   <h5 class="card-title">${req.titulo}</h5>
