@@ -1,5 +1,5 @@
 
-
+var usuarion;
 ///optener id del post
 var URLactual = window.location.search;
 var id;
@@ -99,10 +99,11 @@ function comentar(id){
   console.log(fecha);
   console.log(hora);
   console.log(document.getElementById(`comentario-post-${id}`).value);
+  nombreUsuario();
   if(document.getElementById(`comentario-post-${id}`).value){
     let comentario={
       idEntrada:id,
-      autor:"soa96",
+      autor:usuarion,
       comentario:document.getElementById(`comentario-post-${id}`).value,
     }
     console.log(comentario);
@@ -184,8 +185,11 @@ function nombreUsuario(){
       method:'POST',
         success:(res)=>{
             console.log("inssrtooo...");
-            document.getElementById('sesion').innerHTML=`${res}`;
+            if(document.getElementById('sesion')){
+                document.getElementById('sesion').innerHTML=`${res}`;
+            }
             console.log(res);
+            usuarion=res;
         },
         error:(error)=>{
             console.log("eeeerrrrrtttttooo...");

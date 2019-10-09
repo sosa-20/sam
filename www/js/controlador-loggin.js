@@ -1,5 +1,6 @@
 /*funcion para validar el acceso en el login */
 $("#btn-registro").click(function(){
+    document.getElementById('error').style.display = 'none';
     console.log($("#datoslog").serialize());
     $.ajax({
         url:"usuarios/login",
@@ -11,7 +12,7 @@ $("#btn-registro").click(function(){
             if (res.status == 1)
                 window.location.href = "/inicio.html";
             else 
-                alert("entro a erro "+res.mensaje);
+            document.getElementById('error').style.display = 'block';  
         },
         error:function(error){
             console.error(error);
