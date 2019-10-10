@@ -76,7 +76,7 @@ function anexarArchivo(res, id){
     if (res.tipo=='generico') {
         document.getElementById(id).innerHTML += `<tr id="${res._id}">
         <td><img src="img/genericos.png" style="width: 40px; height: 60px;"/></td>
-        <td>sosa96</td>
+        <td>${res.autor}</td>
         <td>${res.nombreArchivo}</td>
         <td>${res.fechaSubida}</td>
         <td><button type="button" class="btn btn-danger" onclick="eliminar('${res._id}')"><i class="far fa-trash-alt iconot"></i></button></td>
